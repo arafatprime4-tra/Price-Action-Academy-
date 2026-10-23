@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "").strip()
-GROQ_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile").strip()
+GROQ_MODEL = os.getenv("GROQ_VISION_MODEL", "llama-3.3-70b-versatile").strip()
 
 @app.get("/")
 def home():
