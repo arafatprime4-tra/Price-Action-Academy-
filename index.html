@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07111f">
+<title>বাংলা Price Action Academy</title>
+<style>
+:root{--bg:#07111f;--panel:#0d1b2c;--panel2:#10243a;--text:#edf5ff;--muted:#9db1c9;--line:#203953;--green:#35e0a1;--blue:#5bb6ff;--red:#ff7777;--yellow:#ffd166}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#102b43 0%,var(--bg) 55%);color:var(--text);font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif;line-height:1.55}
+button,input,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:11px 14px;font-weight:700;background:var(--green);color:#062018}button:disabled{opacity:.4;cursor:not-allowed}.secondary{background:#142c43;color:var(--text);border:1px solid var(--line)}.outline{background:transparent;color:var(--green);border:1px solid var(--green)}
+header{position:sticky;top:0;z-index:10;background:#07111feF;border-bottom:1px solid var(--line);backdrop-filter:blur(12px);padding:12px max(16px,calc((100% - 1100px)/2));display:flex;justify-content:space-between;align-items:center;gap:10px}
+.brand{font-weight:900;letter-spacing:.2px}.brand span{color:var(--green)}.wrap{max-width:1100px;margin:auto;padding:18px 14px 90px}.hero{padding:22px 18px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,#102942,#0b1929 70%);margin-bottom:16px}.eyebrow{color:var(--green);font-size:.8rem;font-weight:800;letter-spacing:1px}.hero h1{font-size:clamp(1.7rem,5vw,2.6rem);line-height:1.15;margin:8px 0}.muted{color:var(--muted)}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.grid{display:grid;grid-template-columns:1fr;gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;min-width:0}.card h2,.card h3{margin-top:0}.progress{height:9px;border-radius:99px;background:#21354b;overflow:hidden}.progress>div{height:100%;background:var(--green);width:0;transition:width .2s}.layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px;align-items:start}.lesson-list{display:grid;gap:8px}.lesson-item{display:flex;gap:10px;align-items:flex-start;width:100%;text-align:left;background:#0a1726;color:var(--text);border:1px solid var(--line);padding:11px;border-radius:12px}.lesson-item.active{border-color:var(--green);background:#102b35}.lesson-item .num{flex:none;border-radius:8px;background:#17354b;padding:3px 8px;color:var(--green);font-weight:800}.lesson-item.locked{opacity:.55}.pill{font-size:.75rem;padding:3px 8px;border:1px solid var(--line);border-radius:99px;color:var(--muted)}.video{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000}.field{width:100%;border:1px solid var(--line);border-radius:12px;background:#081522;color:var(--text);padding:11px}.lesson-copy h3{color:var(--green)}.lesson-copy li{margin:7px 0}.quiz-option{display:block;width:100%;text-align:left;background:#0a1726;color:var(--text);border:1px solid var(--line);margin:8px 0;padding:12px;border-radius:12px;font-weight:500}.quiz-option.selected{border-color:var(--blue);background:#102b43}.quiz-option.correct{border-color:var(--green)}.quiz-option.wrong{border-color:var(--red)}.feedback{padding:12px;border-radius:12px;margin-top:10px;background:#142b3d}.good{color:var(--green)}.bad{color:var(--red)}.chatlog{display:grid;gap:10px;max-height:350px;overflow:auto;margin:12px 0}.bubble{padding:11px 13px;border-radius:13px;white-space:pre-wrap;overflow-wrap:anywhere}.bubble.user{background:#123a42;margin-left:20px}.bubble.ai{background:#14273b;margin-right:20px}.footer-note{font-size:.8rem;color:var(--muted);margin-top:14px}.hidden{display:none!important}.small{font-size:.88rem}.section-title{display:flex;align-items:center;justify-content:space-between;gap:10px}.bottomnav{display:none}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.lesson-list{grid-template-columns:1fr 1fr}.lesson-item{font-size:.82rem;padding:9px}.wrap{padding:12px 10px 90px}.card{padding:13px}.hero{padding:18px 14px}header{padding:10px 12px}.bottomnav{display:flex;position:fixed;bottom:0;left:0;right:0;background:#07111ff5;border-top:1px solid var(--line);padding:8px;gap:7px;justify-content:space-around;z-index:12}.bottomnav button{font-size:.75rem;padding:8px;background:transparent;color:var(--muted)}.bottomnav button.active{color:var(--green)}}
+@media(min-width:900px){.grid{grid-template-columns:1fr 1fr}.lesson-list{max-height:72vh;overflow:auto;position:sticky;top:80px}}
+</style>
+</head>
+<body>
+<header><div class="brand">GHOST <span>TRADER</span> <span class="pill">ACADEMY</span></div><div class="row"><span id="apiStatus" class="pill">AI status দেখা হচ্ছে…</span><button class="secondary" id="resetBtn" title="সব progress মুছুন">Reset</button></div></header>
+<div class="wrap">
+<section class="hero">
+<div class="eyebrow">BANGLA • STEP-BY-STEP • BEGINNER TO ADVANCED</div>
+<h1>Price Action শিখো,<br><span style="color:var(--green)">এক ধাপ করে।</span></h1>
+<p class="muted">ভিডিও দেখো, চার্ট বুঝো, কুইজ দাও। ভুল হলে ব্যাখ্যা পড়ো। প্রয়োজনীয় কুইজ পাস না করা পর্যন্ত পরের পাঠ খুলবে না।</p>
+<div class="row"><span class="pill" id="progressLabel">0 / 12 পাঠ সম্পন্ন</span><span class="pill">কুইজ পাস স্কোর: 80%</span></div><div class="progress" style="margin-top:12px"><div id="overallBar"></div></div>
+</section>
+<div class="layout">
+<aside class="card" id="coursePanel">
+<div class="section-title"><h2>কোর্সের পাঠ</h2><span class="pill">১২টি</span></div>
+<p class="muted small">প্রথম পাঠ থেকে শুরু করো। পাস করলে পরেরটি আনলক হবে।</p>
+<div class="lesson-list" id="lessonList"></div>
+</aside>
+<main class="grid" style="grid-template-columns:1fr">
+<section class="card" id="lessonPanel">
+<div class="section-title"><div><div class="eyebrow" id="lessonNumber">LESSON 01</div><h2 id="lessonTitle">লোড হচ্ছে…</h2></div><span class="pill" id="lessonState">শুরু হয়নি</span></div>
+<p class="muted" id="lessonGoal"></p>
+<div class="row" style="margin:12px 0"><button id="searchVideoBtn">YouTube-এ ভিডিও খুঁজুন</button><button class="secondary" id="showVideoInputBtn">ভিডিও URL বসান</button><button class="secondary" id="speakBtn">🔊 পাঠ শুনুন</button></div>
+<div id="videoInputWrap" class="hidden" style="margin-bottom:12px"><label for="videoUrl">YouTube ভিডিও URL বা Video ID</label><div class="row" style="margin-top:6px"><input class="field" id="videoUrl" placeholder="https://www.youtube.com/watch?v=..." style="flex:1;min-width:170px"><button id="loadVideoBtn">ভিডিও চালাও</button></div><p class="muted small">বিশ্বস্ত শিক্ষক/চ্যানেলের ভিডিও বেছে নাও। অ্যাপ নিজে ভিডিওর সত্যতা যাচাই করে না।</p></div>
+<div id="videoWrap" class="hidden" style="margin-bottom:14px"><iframe class="video" id="youtubeFrame" title="YouTube lesson video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+<div class="lesson-copy" id="lessonContent"></div>
+<div class="row" style="justify-content:space-between;margin-top:16px"><button class="secondary" id="prevBtn">← আগের পাঠ</button><button id="goQuizBtn">কুইজ শুরু →</button></div>
+</section>
+<section class="card" id="quizPanel">
+<div class="section-title"><h2>🧠 পাঠের কুইজ</h2><span class="pill" id="quizCounter">প্রশ্ন ১</span></div>
+<p class="muted small">উত্তর বেছে নাও। প্রতিটি প্রশ্নের পর কারণ দেখানো হবে। সব প্রশ্নের উত্তর দিয়ে ফলাফল দেখো।</p>
+<div id="quizBody"></div><div id="quizFeedback" class="feedback hidden"></div>
+<div class="row" style="margin-top:12px"><button id="checkAnswerBtn">উত্তর যাচাই</button><button class="secondary" id="nextQuestionBtn" disabled>পরের প্রশ্ন →</button><button class="secondary hidden" id="finishQuizBtn">ফলাফল দেখো</button></div>
+<div id="quizResult" class="feedback hidden"></div>
+</section>
+<section class="card" id="tutorPanel">
+<div class="section-title"><h2>🤖 বাংলা AI শিক্ষক</h2><span class="pill">ঐচ্ছিক API</span></div>
+<p class="muted small">এই পাঠ নিয়ে প্রশ্ন করো। AI-এর উত্তরকে শিক্ষা হিসেবে নাও—এটি লাইভ মার্কেট বিশ্লেষণ বা নিশ্চিত ট্রেড সিগন্যাল নয়।</p>
+<div id="chatLog" class="chatlog" aria-live="polite"><div class="bubble ai">আসসালামু আলাইকুম! কোন বিষয়টি বুঝতে সমস্যা হচ্ছে? সহজ বাংলায় প্রশ্ন করো।</div></div>
+<label for="tutorQuestion">তোমার প্রশ্ন</label><textarea id="tutorQuestion" class="field" rows="3" placeholder="যেমন: Hammer আর Shooting Star-এর পার্থক্য কী?"></textarea>
+<div class="row" style="margin-top:9px"><button id="askTutorBtn">AI-কে জিজ্ঞেস করো</button><button class="secondary" id="voiceInputBtn">🎙️ বলে প্রশ্ন করো</button><button class="secondary" id="stopSpeakBtn">ভয়েস বন্ধ</button></div>
+<p class="footer-note" id="tutorHint">AI চ্যাটের জন্য সার্ভারে GROQ_API_KEY সেট করতে হবে।</p>
+</section>
+<section class="card">
+<h2>📌 নিরাপদ অনুশীলন</h2><ul><li>কোনো ক্যান্ডেল প্যাটার্ন নিশ্চিত লাভ দেয় না।</li><li>প্রথমে demo/paper trading-এ অনুশীলন করো।</li><li>একটি ট্রেডে কত হারাতে পারো, আগে ঠিক করো।</li><li>লস পুষিয়ে নিতে তাড়াহুড়া করে ট্রেড নিও না।</li></ul>
+<p class="footer-note">তোমার অগ্রগতি এই ডিভাইসের browser-এ সংরক্ষিত হয়। browser data মুছলে progress হারাতে পারে।</p>
+</section>
+</main>
+</div>
+</div>
+<nav class="bottomnav"><button class="active" data-scroll="coursePanel">📚 পাঠ</button><button data-scroll="lessonPanel">▶ ক্লাস</button><button data-scroll="quizPanel">🧠 কুইজ</button><button data-scroll="tutorPanel">🤖 AI শিক্ষক</button></nav>
+<script>
+const lessons = [
+{title:"Candlestick-এর ভিত্তি",goal:"Open, High, Low, Close এবং candle body/wick চিনতে শেখা।",body:"<h3>আজকের লক্ষ্য</h3><p>একটি ক্যান্ডেল নির্দিষ্ট সময়ের মধ্যে চারটি তথ্য দেখায়: Open (শুরুর দাম), High (সর্বোচ্চ), Low (সর্বনিম্ন), Close (শেষের দাম)। Body হলো Open ও Close-এর মধ্যবর্তী অংশ; wick হলো body-এর বাইরের high/low অংশ।</p><h3>মনে রাখো</h3><ul><li>Close যদি Open-এর উপরে হয়, candle সাধারণত bullish/সবুজ।</li><li>Close যদি Open-এর নিচে হয়, candle সাধারণত bearish/লাল।</li><li>একটি candle একা ভবিষ্যৎ নিশ্চিত করে না।</li></ul><p><b>প্র্যাকটিস:</b> চার্টে একটি bullish ও একটি bearish candle খুঁজে তাদের Open/Close চিহ্নিত করো।",quiz:[["Candle-এর body কী দেখায়?",["Open থেকে Close-এর অংশ","দিনের সব ট্রেড","শুধু High"],0,"Body Open ও Close-এর মধ্যবর্তী অংশ।"],["Wick কী দেখায়?",["শুধু closing price","সময়","সেই candle-এর high/low-এর বিস্তার"],2,"Wick high এবং low-এর দিকে body-এর বাইরের অংশ দেখায়।"],["একটি candle কি ভবিষ্যৎ নিশ্চিত করে?",["হ্যাঁ","না","শুধু সবুজ হলে"],1,"কোনো candle-ই ভবিষ্যৎ নিশ্চিত করে না।"]]},
+{title:"Hammer ও Pin Bar",goal:"লম্বা wick, ছোট body এবং context বোঝা।",body:"<h3>Hammer / Bullish Pin Bar</h3><p>নিচের wick লম্বা, body উপরের দিকে এবং উপরের wick ছোট হলে hammer-এর মতো দেখায়। Downtrend-এর পরে বা support-এ এটি নিচের দাম প্রত্যাখ্যানের ইঙ্গিত হতে পারে।</p><h3>Shooting Star</h3><p>উপরের wick লম্বা এবং body নিচের দিকে হলে shooting star-এর মতো দেখায়। Uptrend-এর পরে resistance-এ তা bearish rejection-এর ইঙ্গিত হতে পারে।</p><h3>ভুল করো না</h3><p>শুধু আকৃতি দেখে entry নিও না। candle close, market context, support/resistance ও risk plan দেখো।",quiz:[["Downtrend-এর পরে support-এ লম্বা lower wick ও ছোট upper body কোন প্যাটার্নের মতো?",["Shooting Star","Hammer / Bullish Pin Bar","Doji"],1,"নিচের দামের rejection hammer/bullish pin bar-এর সম্ভাব্য বৈশিষ্ট্য।"],["ক্যান্ডেল বন্ধ হওয়ার আগে শুধু আকৃতি দেখে entry নেওয়া উচিত?",["হ্যাঁ","না, close ও context দেখা ভালো","সবসময়"],1,"অসমাপ্ত candle-এর আকৃতি বদলাতে পারে।"],["Hammer নিশ্চিতভাবে দাম বাড়াবে?",["হ্যাঁ","না, এটি শুধু সম্ভাব্য ইঙ্গিত","শুধু M1-এ"],1,"প্যাটার্ন ব্যর্থ হতে পারে; নিশ্চিত ফল নেই।"]]},
+{title:"Support ও Resistance",goal:"দামের প্রতিক্রিয়ার অঞ্চল খুঁজে বের করা।",body:"<h3>Support</h3><p>যে অঞ্চল থেকে দাম আগে নেমে এসে বারবার থেমেছে বা উঠেছে।</p><h3>Resistance</h3><p>যে অঞ্চল থেকে দাম আগে উঠে এসে বারবার থেমেছে বা নেমেছে। এগুলো একদম সরু লাইন নয়; সাধারণত অঞ্চল হিসেবে ভাবা ভালো।</p><ul><li>একই জায়গায় বহুবার প্রতিক্রিয়া থাকলে অঞ্চলটি নজরে রাখো।</li><li>পুরনো level ভবিষ্যতে ভাঙতে পারে।</li><li>চার্টের বড় timeframe দেখে context বোঝো।</li></ul>",quiz:[["Support সাধারণত কী?",["দাম প্রতিক্রিয়া দেখাতে পারে এমন নিচের অঞ্চল","সবসময় buy signal","একটি নির্দিষ্ট indicator"],0,"Support কোনো নিশ্চয়তা নয়; এটি সম্ভাব্য demand/প্রতিক্রিয়ার অঞ্চল।"],["Level আঁকার ভালো উপায় কোনটি?",["সবসময় এক pixel line","প্রতিক্রিয়ার অঞ্চল হিসেবে","যেখানে ইচ্ছা"],1,"দাম প্রায়ই zone-এ প্রতিক্রিয়া দেখায়, একদম একই দামে নয়।"],["Support কি ভাঙতে পারে?",["না","হ্যাঁ","শুধু শুক্রবারে"],1,"Support ভেঙে যেতে পারে।"]]},
+{title:"Trend ও Market Structure",goal:"Higher high, higher low, lower high, lower low চিনতে শেখা।",body:"<h3>Uptrend</h3><p>দাম ধারাবাহিকভাবে Higher High (HH) ও Higher Low (HL) তৈরি করলে uptrend-এর কাঠামো দেখা যায়।</p><h3>Downtrend</h3><p>Lower Low (LL) ও Lower High (LH) তৈরি হলে downtrend-এর কাঠামো দেখা যায়।</p><p>একটি ছোট pullback মানেই trend reversal নয়। swing point-গুলো চিহ্নিত করে context পড়ো।</p>",quiz:[["HH ও HL ধারাবাহিকভাবে তৈরি হলে সাধারণত কী বোঝায়?",["Uptrend structure","Downtrend","Market বন্ধ"],0,"Higher highs ও higher lows bullish structure-এর লক্ষণ।"],["একটি pullback কি trend reversal নিশ্চিত করে?",["হ্যাঁ","না","সবসময়"],1,"Structure বদলেছে কি না দেখতে হয়।"],["LL ও LH সাধারণত কোন কাঠামো?",["Uptrend","Downtrend","Sideways নিশ্চিত"],1,"Lower lows এবং lower highs bearish structure নির্দেশ করতে পারে।"]]},
+{title:"Breakout ও Retest",goal:"Level ভাঙা ও পুনরায় পরীক্ষা করার পার্থক্য শেখা।",body:"<h3>Breakout</h3><p>দাম কোনো গুরুত্বপূর্ণ support/resistance zone-এর বাইরে চলে গেলে breakout হতে পারে।</p><h3>Retest</h3><p>Breakout-এর পরে দাম ভাঙা level-এ ফিরে এসে সেটিকে পরীক্ষা করতে পারে। সব breakout retest দেয় না, আর সব retest সফল হয় না।</p><p><b>প্র্যাকটিস:</b> চার্টে একটি level আঁকো; candle close zone-এর বাইরে হয়েছে কি না লিখে রাখো।",quiz:[["Breakout বলতে কী বোঝায়?",["দাম গুরুত্বপূর্ণ zone-এর বাইরে যাওয়া","দাম সবসময় উল্টে যাওয়া","শুধু wick"],0,"Breakout-এ close ও context গুরুত্বপূর্ণ।"],["প্রতিটি breakout কি সফল হয়?",["হ্যাঁ","না, false breakout হয়","শুধু forex-এ"],1,"False breakout সাধারণ ঘটনা।"],["Retest কী?",["ভাঙা level আবার পরীক্ষা করতে ফিরে আসা","একটি oscillator","কোনো candle-এর নাম"],0,"Retest level-এর কাছে ফিরে এসে প্রতিক্রিয়া দেখাতে পারে।"]]},
+{title:"False Breakout ও Liquidity Sweep",goal:"Level-এর বাইরে গিয়ে আবার ফিরে আসা price action বোঝা।",body:"<h3>False Breakout</h3><p>দাম level-এর বাইরে গেলেও ধরে রাখতে না পেরে আবার range-এ ফিরে আসে।</p><h3>Liquidity Sweep</h3><p>পরিচিত high/low-এর বাইরে দাম গিয়ে দ্রুত ফিরে আসতে পারে। অনেকে এটিকে liquidity sweep বলে; তবে শুধু wick দেখেই বড় প্রতিষ্ঠানের উদ্দেশ্য নিশ্চিত বলা যায় না।</p><p>confirmation, candle close ও risk plan ছাড়া তাড়াহুড়া কোরো না।</p>",quiz:[["False breakout-এর সাধারণ লক্ষণ কী?",["দাম বাইরে গিয়ে আবার range-এ ফিরে আসা","দাম কখনো ফিরে না আসা","সবসময় বড় volume"],0,"বাইরে গিয়ে ধরে রাখতে না পারা false breakout-এর লক্ষণ হতে পারে।"],["একটি wick কি প্রমাণ করে যে প্রতিষ্ঠানগুলো stop hunt করেছে?",["হ্যাঁ","না, শুধু wick দিয়ে উদ্দেশ্য প্রমাণ হয় না","সবসময়"],1,"চার্টের একটি ঘটনা থেকে market participant-এর উদ্দেশ্য নিশ্চিত করা যায় না।"],["Sweep-এর পরে কী দেখা জরুরি?",["কোনো confirmation নয়","প্রতিক্রিয়া, close ও context","শুধু candle-এর রং"],1,"Context ও risk management অপরিহার্য।"]]},
+{title:"Order Block-এর ধারণা",goal:"সম্ভাব্য supply/demand area-কে সতর্কভাবে দেখা।",body:"<h3>Order Block</h3><p>Price-action শিক্ষায় বড় impulsive move-এর আগে থাকা শেষ বিপরীতমুখী candle/zone-কে অনেক সময় order block বলা হয়। কিন্তু trader-ভেদে সংজ্ঞা আলাদা এবং প্রতিটি zone কাজ করে না।</p><ul><li>আগের structure ও displacement দেখো।</li><li>zone-এ ফিরে এলে reaction হয়েছে কি না দেখো।</li><li>পেছনের chart-এ মানিয়ে নেওয়া (hindsight bias) এড়িয়ে চল।</li></ul>",quiz:[["Order Block-এর একক, সর্বজনস্বীকৃত সংজ্ঞা আছে?",["হ্যাঁ","না, পদ্ধতিভেদে সংজ্ঞা বদলায়","এটি একটি candle colour"],1,"Order Block বিভিন্ন methodology-তে ভিন্নভাবে সংজ্ঞায়িত হয়।"],["Zone আঁকার পর কী পরীক্ষা করবে?",["প্রতিক্রিয়া ও structure","নিশ্চিত লাভ","কিছুই নয়"],0,"Zone কেবল একটি সম্ভাব্য area।"],["সব Order Block কাজ করে?",["হ্যাঁ","না","শুধু রাতের বেলা"],1,"কোনো zone-ই নিশ্চিত নয়।"]]},
+{title:"Fair Value Gap (FVG)",goal:"দ্রুত price displacement-এ তৈরি imbalance zone চেনা।",body:"<h3>FVG কী?</h3><p>একটি প্রচলিত তিন-candle পদ্ধতিতে bullish FVG দেখা যায় যখন প্রথম candle-এর high ও তৃতীয় candle-এর low-এর মধ্যে overlap থাকে না; bearish FVG-তে উল্টোভাবে প্রথম candle-এর low ও তৃতীয় candle-এর high-এর মধ্যে gap থাকে।</p><p>এটি চার্টে imbalance হিসেবে চিহ্নিত করা হয়। সব FVG পূরণ হবে বা সেখান থেকে দাম ফিরবে—এমন নিশ্চয়তা নেই।</p>",quiz:[["FVG সাধারণত কোন ধারণা বোঝায়?",["দ্রুত move-এর আশপাশের imbalance zone","গ্যারান্টিযুক্ত entry","একটি moving average"],0,"FVG price displacement-এর সঙ্গে যুক্ত একটি chart concept।"],["সব FVG কি fill হয়?",["হ্যাঁ","না, নিশ্চিত নয়","শুধু bullish"],1,"সব FVG পূরণ হয় না।"],["FVG একা trade signal হিসেবে যথেষ্ট?",["হ্যাঁ","না, context ও risk plan দরকার","সবসময়"],1,"একটি ধারণাকে context ছাড়া ব্যবহার করা ঝুঁকিপূর্ণ।"]]},
+{title:"Market Structure Shift, BOS ও CHoCH",goal:"Structure break এবং সম্ভাব্য পরিবর্তনের পার্থক্য।",body:"<h3>BOS</h3><p>Break of Structure (BOS) সাধারণত চলমান কাঠামোর গুরুত্বপূর্ণ swing ভাঙাকে বোঝায়।</p><h3>CHoCH</h3><p>Change of Character (CHoCH) অনেক পদ্ধতিতে আগের trend-এর বিপরীতে প্রথম গুরুত্বপূর্ণ structure break বোঝায়। নাম ও নিয়ম strategy-ভেদে আলাদা হতে পারে।</p><p>wick না candle close—কোন নিয়মে break ধরবে তা আগে নির্দিষ্ট করো এবং backtest করো।</p>",quiz:[["BOS সাধারণত কী বোঝায়?",["গুরুত্বপূর্ণ structure level ভাঙা","একটি indicator","নিশ্চিত reversal"],0,"BOS হলো market structure বিশ্লেষণের একটি term।"],["CHoCH কি reversal নিশ্চিত করে?",["হ্যাঁ","না, সম্ভাব্য পরিবর্তনের ইঙ্গিত","সবসময়"],1,"Structure shift ব্যর্থও হতে পারে।"],["Strategy-তে break-এর নিয়ম কী করা উচিত?",["প্রতিবার বদলানো","আগে থেকে নির্দিষ্ট করে test করা","কখনো লিখে না রাখা"],1,"নিয়ম স্থির করে test করলে ফল তুলনা করা যায়।"]]},
+{title:"Multi-Timeframe Analysis",goal:"বড় timeframe-এর context ও ছোট timeframe-এর setup মিলিয়ে দেখা।",body:"<h3>কেন?</h3><p>Higher timeframe বাজারের বড় কাঠামো দেখাতে পারে; lower timeframe আরও সূক্ষ্ম entry structure দেখাতে পারে। তবে timeframe মিললেই trade সফল হবে না।</p><ul><li>আগে বড় timeframe-এ trend/zone দেখো।</li><li>তারপর ছোট timeframe-এ নির্দিষ্ট setup খোঁজো।</li><li>একাধিক timeframe বিরোধ করলে অপেক্ষা করাও সিদ্ধান্ত হতে পারে।</li></ul>",quiz:[["Multi-timeframe analysis-এর উদ্দেশ্য কী?",["বড় context ও ছোট setup একসঙ্গে বোঝা","লাভ নিশ্চিত করা","একই chart বারবার দেখা"],0,"এটি context যোগ করে, নিশ্চয়তা নয়।"],["Higher ও lower timeframe মিললেই trade নিশ্চিত?",["হ্যাঁ","না","শুধু M1-এ"],1,"কোনো alignment নিশ্চিত লাভ দেয় না।"],["Timeframe বিরোধ করলে কী করা যায়?",["জোর করে entry","অপেক্ষা বা trade এড়িয়ে চলা","risk দ্বিগুণ করা"],1,"No-trade-ও একটি বৈধ সিদ্ধান্ত।"]]},
+{title:"Risk Management ও Position Sizing",goal:"প্রতি ট্রেডে সম্ভাব্য ক্ষতি নিয়ন্ত্রণের পরিকল্পনা করা।",body:"<h3>প্রথমে risk ঠিক করো</h3><p>Entry নেওয়ার আগে কোথায় setup invalid হবে, কত টাকা ঝুঁকিতে থাকবে, এবং trade নিলে reward/risk কেমন—এসব নির্ধারণ করো। Position size নির্ভর করে account size, risk amount ও stop distance-এর ওপর; product অনুযায়ী হিসাব আলাদা।</p><ul><li>লসের পরে stake বাড়িয়ে ক্ষতি পুষিয়ে নিতে যেও না।</li><li>একসঙ্গে একাধিক correlated trade নিলে মোট risk বাড়ে।</li><li>Binary options/OTC-তে payout ও platform risk আলাদা; সাধারণ spot-forex হিসাব সরাসরি প্রযোজ্য নাও হতে পারে।</li></ul>",quiz:[["Trade-এর আগে কী নির্ধারণ করা উচিত?",["সম্ভাব্য ক্ষতি ও invalidation","শুধু লাভের লক্ষ্য","অন্যের signal"],0,"Risk plan entry-এর আগে তৈরি করতে হয়।"],["Loss-এর পরে stake দ্বিগুণ করা কি নিরাপদ?",["হ্যাঁ","না, এতে ক্ষতি দ্রুত বাড়তে পারে","সবসময়"],1,"Martingale বড় drawdown ঘটাতে পারে।"],["Position size কোন বিষয়ের ওপর নির্ভর করে?",["Account, risk amount ও stop distance","শুধু candle colour","শুধু সময়"],0,"Position sizing-এর ভিত্তি হলো নির্ধারিত risk ও trade-এর কাঠামো।"]]},
+{title:"Trading Plan, Journal ও Backtesting",goal:"নিজের strategy নিয়মমাফিক পরীক্ষা করা ও ফল লিখে রাখা।",body:"<h3>একটি লিখিত setup</h3><p>Entry condition, invalidation/stop, exit, session, market condition ও no-trade rules লিখে রাখো। তারপর historical chart-এ একই নিয়মে sample সংগ্রহ করো।</p><h3>Journal</h3><p>তারিখ, setup, screenshot, নিয়ম মানা হয়েছে কি না, ফলাফল ও শেখা বিষয় লিখে রাখো। যথেষ্ট sample ও বাস্তবসম্মত খরচ ছাড়া কয়েকটি win দেখে strategy ভালো ধরে নিও না।</p>",quiz:[["Backtesting-এ নিয়ম কী হওয়া উচিত?",["প্রতিবার বদলানো","একই নিয়মে যথেষ্ট sample পরীক্ষা","শুধু win বাছাই"],1,"Consistent rule ছাড়া ফল নির্ভরযোগ্যভাবে তুলনা করা যায় না।"],["Trading journal কী কাজে লাগে?",["নিজের সিদ্ধান্ত ও ফল পর্যালোচনা","নিশ্চিত লাভ","loss লুকানো"],0,"Journal থেকে আচরণ ও setup-এর দুর্বলতা শেখা যায়।"],["কয়েকটি win কি strategy প্রমাণ করে?",["হ্যাঁ","না, বেশি sample ও খরচ বিবেচনা দরকার","শুধু demo-তে"],1,"ছোট sample-এ ভাগ্য ও randomness প্রভাব ফেলতে পারে।"]]}
+];
+const STORAGE_KEY="banglaPAacademy.v1";
+let progress=loadProgress(), current=0, qIndex=0, selected=null, answered=false, quizAnswers=[], chatHistory=[];
+function loadProgress(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{completed:[],scores:{},videos:{}}}catch(e){return {completed:[],scores:{},videos:{}}}}
+function saveProgress(){localStorage.setItem(STORAGE_KEY,JSON.stringify(progress));}
+function unlocked(i){return i===0||progress.completed.includes(i-1)}
+function renderList(){
+ const list=document.getElementById("lessonList");list.innerHTML="";
+ lessons.forEach((l,i)=>{const b=document.createElement("button");b.className="lesson-item"+(i===current?" active":"")+(unlocked(i)?"":" locked");b.disabled=!unlocked(i);let status=progress.completed.includes(i)?"✓ সম্পন্ন":(unlocked(i)?"শুরু করো":"🔒 লক");b.innerHTML=`<span class="num">${String(i+1).padStart(2,"0")}</span><span><b>${l.title}</b><br><span class="muted small">${status}</span></span>`;b.onclick=()=>selectLesson(i);list.appendChild(b)});
+ const n=progress.completed.length;document.getElementById("progressLabel").textContent=`${n} / ${lessons.length} পাঠ সম্পন্ন`;document.getElementById("overallBar").style.width=(n/lessons.length*100)+"%";
+}
+function selectLesson(i){if(!unlocked(i))return;current=i;qIndex=0;selected=null;answered=false;quizAnswers=[];renderList();renderLesson();renderQuiz();document.getElementById("quizResult").classList.add("hidden");}
+function renderLesson(){
+ const l=lessons[current];document.getElementById("lessonNumber").textContent="LESSON "+String(current+1).padStart(2,"0");
+ document.getElementById("lessonTitle").textContent=l.title;document.getElementById("lessonGoal").textContent=l.goal;
+ document.getElementById("lessonContent").innerHTML=l.body;
+ document.getElementById("lessonState").textContent=progress.completed.includes(current)?"সম্পন্ন":(unlocked(current)?"চলছে":"লক");
+ document.getElementById("prevBtn").disabled=current===0;
+ document.getElementById("goQuizBtn").textContent="কুইজ শুরু →";
+ document.getElementById("searchVideoBtn").onclick=()=>window.open("https://www.youtube.com/results?search_query="+encodeURIComponent("price action trading "+l.title+" Bangla tutorial"),"_blank","noopener");
+ document.getElementById("videoInputWrap").classList.add("hidden");document.getElementById("videoWrap").classList.add("hidden");
+ document.getElementById("videoUrl").value=progress.videos[current]||"";
+}
+function renderQuiz(){
+ const l=lessons[current],q=l.quiz[qIndex];selected=null;answered=false;
+ document.getElementById("quizCounter").textContent=`প্রশ্ন ${qIndex+1} / ${l.quiz.length}`;
+ document.getElementById("quizFeedback").classList.add("hidden");document.getElementById("nextQuestionBtn").disabled=true;document.getElementById("finishQuizBtn").classList.add("hidden");document.getElementById("checkAnswerBtn").classList.remove("hidden");
+ document.getElementById("quizBody").innerHTML=`<h3>${q[0]}</h3>`+q[1].map((opt,i)=>`<button class="quiz-option" data-choice="${i}">${String.fromCharCode(65+i)}. ${opt}</button>`).join("");
+ document.querySelectorAll(".quiz-option").forEach(btn=>btn.onclick=()=>{if(answered)return;document.querySelectorAll(".quiz-option").forEach(x=>x.classList.remove("selected"));btn.classList.add("selected");selected=Number(btn.dataset.choice)});
+}
+function checkAnswer(){
+ if(selected===null){alert("আগে একটি উত্তর বেছে নাও।");return}
+ const q=lessons[current].quiz[qIndex];answered=true;quizAnswers[qIndex]=selected;
+ document.querySelectorAll(".quiz-option").forEach((b,i)=>{if(i===q[2])b.classList.add("correct");if(i===selected&&i!==q[2])b.classList.add("wrong")});
+ const fb=document.getElementById("quizFeedback");fb.classList.remove("hidden");fb.innerHTML=(selected===q[2]?'<b class="good">সঠিক উত্তর! </b>':'<b class="bad">এটি সঠিক নয়। </b>')+q[3];
+ document.getElementById("checkAnswerBtn").classList.add("hidden");
+ if(qIndex<lessons[current].quiz.length-1)document.getElementById("nextQuestionBtn").disabled=false;else document.getElementById("finishQuizBtn").classList.remove("hidden");
+}
+function finishQuiz(){
+ const qs=lessons[current].quiz;let correct=qs.reduce((n,q,i)=>n+(quizAnswers[i]===q[2]?1:0),0);let pct=Math.round(correct/qs.length*100);progress.scores[current]=pct;
+ const passed=pct>=80;if(passed&&!progress.completed.includes(current))progress.completed.push(current);saveProgress();renderList();
+ const r=document.getElementById("quizResult");r.classList.remove("hidden");r.innerHTML=`<h3>${passed?'<span class="good">পাঠ পাস করেছ!</span>':'<span class="bad">এখনো পাস হয়নি</span>'}</h3><p>স্কোর: <b>${correct}/${qs.length} (${pct}%)</b></p><p>${passed?(current===lessons.length-1?"অভিনন্দন! সব পাঠ সম্পন্ন হয়েছে।":"পরবর্তী পাঠ আনলক হয়েছে। ভুল উত্তরগুলোর ব্যাখ্যাও আবার পড়ো।"):"পরবর্তী পাঠ লক থাকবে। এই পাঠের ব্যাখ্যা আবার পড়ো এবং কুইজ পুনরায় দাও।"}</p><button id="retryQuizBtn" class="secondary">আবার কুইজ দাও</button> ${passed&&current<lessons.length-1?'<button id="nextLessonBtn">পরবর্তী পাঠ →</button>':''}`;
+ document.getElementById("quizBody").innerHTML="";document.getElementById("quizFeedback").classList.add("hidden");document.getElementById("checkAnswerBtn").classList.add("hidden");document.getElementById("nextQuestionBtn").classList.add("hidden");document.getElementById("finishQuizBtn").classList.add("hidden");
+ document.getElementById("retryQuizBtn").onclick=()=>{qIndex=0;quizAnswers=[];document.getElementById("quizResult").classList.add("hidden");document.getElementById("nextQuestionBtn").classList.remove("hidden");renderQuiz()};
+ const next=document.getElementById("nextLessonBtn");if(next)next.onclick=()=>selectLesson(current+1);
+ document.getElementById("lessonState").textContent=passed?"সম্পন্ন":"আবার অনুশীলন";
+}
+function parseYoutube(input){
+ const s=input.trim();if(/^[\w-]{11}$/.test(s))return s;
+ try{const u=new URL(s);if(u.hostname.includes("youtu.be"))return u.pathname.split("/").filter(Boolean)[0]||null;if(u.hostname.includes("youtube.com")){if(u.searchParams.get("v"))return u.searchParams.get("v");const p=u.pathname.split("/");const idx=p.findIndex(x=>["embed","shorts","live"].includes(x));if(idx>=0)return p[idx+1]||null}}catch(e){}return null;
+}
+document.getElementById("showVideoInputBtn").onclick=()=>document.getElementById("videoInputWrap").classList.toggle("hidden");
+document.getElementById("loadVideoBtn").onclick=()=>{const raw=document.getElementById("videoUrl").value;const id=parseYoutube(raw);if(!id||!/^[\w-]{11}$/.test(id)){alert("সঠিক YouTube URL বা 11 অক্ষরের video ID দাও।");return}document.getElementById("youtubeFrame").src="https://www.youtube-nocookie.com/embed/"+id;document.getElementById("videoWrap").classList.remove("hidden");progress.videos[current]=raw;saveProgress()};
+document.getElementById("prevBtn").onclick=()=>selectLesson(Math.max(0,current-1));
+document.getElementById("goQuizBtn").onclick=()=>document.getElementById("quizPanel").scrollIntoView({behavior:"smooth",block:"start"});
+document.getElementById("checkAnswerBtn").onclick=checkAnswer;
+document.getElementById("nextQuestionBtn").onclick=()=>{qIndex++;renderQuiz()};
+document.getElementById("finishQuizBtn").onclick=finishQuiz;
+document.getElementById("resetBtn").onclick=()=>{if(confirm("সব progress ও ভিডিও পছন্দ মুছে ফেলবে?")){localStorage.removeItem(STORAGE_KEY);progress=loadProgress();selectLesson(0)}};
+document.getElementById("speakBtn").onclick=()=>{if(!("speechSynthesis" in window)){alert("এই browser-এ Text-to-Speech সমর্থিত নয়।");return}speechSynthesis.cancel();const text=document.getElementById("lessonTitle").innerText+". "+document.getElementById("lessonGoal").innerText+". "+document.getElementById("lessonContent").innerText;const u=new SpeechSynthesisUtterance(text);u.lang="bn-BD";u.rate=.88;speechSynthesis.speak(u)};
+document.getElementById("stopSpeakBtn").onclick=()=>{if("speechSynthesis"in window)speechSynthesis.cancel()};
+function addBubble(role,text){const el=document.createElement("div");el.className="bubble "+(role==="user"?"user":"ai");el.textContent=text;document.getElementById("chatLog").appendChild(el);document.getElementById("chatLog").scrollTop=999999}
+async function askTutor(){
+ const box=document.getElementById("tutorQuestion"),question=box.value.trim();if(!question)return;addBubble("user",question);box.value="";document.getElementById("askTutorBtn").disabled=true;
+ chatHistory.push({role:"user",content:question});
+ try{const res=await fetch("/api/tutor",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({question,lesson_title:lessons[current].title,history:chatHistory.slice(-8)})});const data=await res.json();if(!res.ok)throw new Error(data.error+(data.hint?" "+data.hint:""));addBubble("assistant",data.answer);chatHistory.push({role:"assistant",content:data.answer});if(chatHistory.length>12)chatHistory=chatHistory.slice(-12)}
+ catch(e){addBubble("assistant","AI শিক্ষক এখন উত্তর দিতে পারেনি। "+e.message+" পাঠ, ভিডিও ও কুইজ ব্যবহার করা যাবে।")}
+ finally{document.getElementById("askTutorBtn").disabled=false}
+}
+document.getElementById("askTutorBtn").onclick=askTutor;
+document.getElementById("tutorQuestion").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();askTutor()}});
+document.getElementById("voiceInputBtn").onclick=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){alert("এই browser-এ voice input সমর্থিত নয়। Android Chrome-এ চেষ্টা করো বা লিখে প্রশ্ন করো।");return}const rec=new SR();rec.lang="bn-BD";rec.interimResults=false;rec.onresult=e=>{document.getElementById("tutorQuestion").value=e.results[0][0].transcript};rec.onerror=()=>alert("Voice input কাজ করেনি। Microphone permission পরীক্ষা করো।");rec.start()};
+document.querySelectorAll("[data-scroll]").forEach(b=>b.onclick=()=>{document.querySelectorAll(".bottomnav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.scroll).scrollIntoView({behavior:"smooth",block:"start"})});
+async function checkApi(){try{const r=await fetch("/api/health");const d=await r.json();document.getElementById("apiStatus").textContent=d.ai_configured?"AI শিক্ষক: প্রস্তুত":"AI key নেই";document.getElementById("apiStatus").style.color=d.ai_configured?"var(--green)":"var(--yellow)";document.getElementById("tutorHint").textContent=d.ai_configured?"AI configured: "+d.model:"AI chat চালাতে Render Environment Variables-এ GROQ_API_KEY সেট করো।"}catch(e){document.getElementById("apiStatus").textContent="সার্ভার সংযোগ নেই"}}
+renderList();selectLesson(0);checkApi();
+</script>
+</body>
+</html>
